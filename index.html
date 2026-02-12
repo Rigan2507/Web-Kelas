@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF2 | Management </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#020617] text-slate-200 min-h-screen overflow-hidden">
+    
+    <div class="fixed inset-0 z-[-1]">
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-sky-500/10 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] rounded-full"></div>
+    </div>
+
+    <nav class="fixed top-0 left-0 h-screen w-20 md:w-24 flex flex-col items-center py-8 glass border-r border-white/5 z-50">
+        <div class="w-12 h-12 neo-gradient rounded-2xl flex items-center justify-center mb-12 shadow-lg shadow-sky-500/20">
+            <span class="font-black text-white text-xl uppercase">i2</span>
+        </div>
+        <div class="flex flex-col gap-8">
+            <button onclick="showPage('home')" id="btn-home" class="nav-btn active"><i class="fas fa-home"></i></button>
+            <button onclick="showPage('schedule')" id="btn-schedule" class="nav-btn"><i class="fas fa-calendar-alt"></i></button>
+            <button onclick="showPage('finance')" id="btn-finance" class="nav-btn"><i class="fas fa-wallet"></i></button>
+            <button onclick="showPage('gallery')" id="btn-gallery" class="nav-btn"><i class="fas fa-images"></i></button>
+            <button onclick="showPage('portal')" id="btn-portal" class="nav-btn"><i class="fas fa-user-shield"></i></button>
+        </div>
+    </nav>
+
+    <main class="ml-20 md:ml-24 p-6 md:p-12 h-screen overflow-y-auto">
+        
+        <section id="page-home" class="page-content active">
+            <div class="max-w-4xl animate-slide-up">
+                <span class="badge">Informatika 2 2024</span>
+                <h1 class="text-6xl md:text-8xl font-black mt-6 tracking-tighter">
+                    Built for <br> <span class="text-gradient">Innovators.</span>
+                </h1>
+                <p class="text-gray-400 mt-8 text-lg leading-relaxed max-w-2xl">
+                    Sistem manajemen terpusat Informatika 2. Pantau jadwal harian, kelola iuran kas secara transparan, dan simpan momen terbaik kelas kita.
+                </p>
+                <div class="flex gap-4 mt-12">
+                    <button onclick="showPage('schedule')" class="btn-primary">Lihat Jadwal</button>
+                    <button onclick="showPage('finance')" class="btn-secondary">Cek Kas</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-schedule" class="page-content">
+            <div class="animate-slide-up">
+                <h2 class="text-4xl font-black mb-10 italic uppercase">CLASS <span class="text-gradient">SCHEDULE</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="schedule-container">
+                    </div>
+            </div>
+        </section>
+
+        <section id="page-finance" class="page-content">
+            <div class="animate-slide-up">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                    <div>
+                        <h2 class="text-4xl font-black italic">FINANCE <span class="text-gradient">HUB</span></h2>
+                        <div id="admin-indicator" class="mt-2 text-[10px] font-bold py-1 px-3 bg-red-500/10 text-red-400 rounded-full border border-red-500/20 inline-block">READ-ONLY MODE</div>
+                    </div>
+                    <div class="glass px-8 py-5 rounded-[2rem] border-glow text-right">
+                        <p class="text-[10px] text-sky-400 font-bold uppercase tracking-widest">Saldo Terkumpul</p>
+                        <h3 class="text-3xl font-black text-white" id="total-saldo-display">Rp 0</h3>
+                    </div>
+                </div>
+
+                <div class="glass rounded-[2.5rem] overflow-hidden border-glow shadow-2xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-white/5">
+                                <tr class="text-sky-400 text-[10px] font-black uppercase tracking-widest">
+                                    <th class="p-6 border-r border-white/5">Nama Siswa</th>
+                                    <th class="p-4 text-center">Sen</th>
+                                    <th class="p-4 text-center">Sel</th>
+                                    <th class="p-4 text-center">Rab</th>
+                                    <th class="p-4 text-center">Kam</th>
+                                    <th class="p-4 text-center">Jum</th>
+                                    <th class="p-4 text-center">Sab</th>
+                                    <th class="p-6 text-right">Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kas-table-body" class="divide-y divide-white/5"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-gallery" class="page-content">
+            <div class="animate-slide-up">
+                <h2 class="text-4xl font-black mb-10">CLASS <span class="text-gradient">GALLERY</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600"><div class="overlay">Lab Coding</div></div>
+                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600"><div class="overlay">Brainstorming</div></div>
+                    <div class="gallery-card"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600"><div class="overlay">Team Work</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-portal" class="page-content">
+            <div class="max-w-md mx-auto mt-20 animate-slide-up">
+                <div class="glass p-10 rounded-[3rem] border-glow text-center">
+                    <div class="w-20 h-20 bg-sky-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-sky-500/20">
+                        <i class="fas fa-fingerprint text-3xl text-sky-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 tracking-tight">Admin Authentication</h3>
+                    <p class="text-gray-400 text-sm mb-8">Masukkan kode akses untuk aktivasi fitur edit kas.</p>
+                    <input type="password" id="admin-pass" placeholder="KODE RAHASIA" class="input-field mb-4 text-center tracking-[0.5em] font-bold">
+                    <button onclick="verifyAccess()" class="btn-primary w-full shadow-lg shadow-sky-500/20">LOG IN</button>
+                    <button onclick="logoutAdmin()" id="logout-btn" class="hidden w-full text-red-400 text-xs font-bold mt-4">LOGOUT ADMIN</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
